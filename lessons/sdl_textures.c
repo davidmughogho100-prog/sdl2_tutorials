@@ -56,6 +56,12 @@ int main()
 		SDL_RenderPresent(render);
 
 	}
+	// clean up resources
+	SDL_DestroyTexture(img_texture);
+
+	SDL_DestroyRenderer(render);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
 }
 
 

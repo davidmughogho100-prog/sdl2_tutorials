@@ -62,6 +62,13 @@ int main()
 		SDL_RenderPresent(render);
 	}
 	
+	// clean up resources
+	Mix_FreeMusic(song);
+
+	SDL_DestroyRenderer(render);
+	SDL_DestroyWindow(win);
+	Mix_Quit();
+	SDL_Quit();
 }
 
 
