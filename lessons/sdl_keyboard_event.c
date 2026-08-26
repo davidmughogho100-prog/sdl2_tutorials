@@ -74,6 +74,13 @@ int main()
 		SDL_SetRenderDrawColor(render, 0,0,0,255);
 		SDL_RenderClear(render);
 		SDL_RenderPresent(render);
+
+
+		// be sure to clean up
+		// hope you remember we are using c
+		SDL_DestroyRenderer(render);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
 	}
 }
 

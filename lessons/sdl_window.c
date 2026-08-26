@@ -36,4 +36,24 @@ int main()
 		SDL_RenderClear(render);
 		SDL_RenderPresent(render);
 	}
+
+	// clean up resources 
+	SDL_DestroyRenderer(render);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

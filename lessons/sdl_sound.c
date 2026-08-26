@@ -4,32 +4,40 @@
 
  Compilation commands:
  ====================
-	 Linux ==>  gcc sdl_textures.c -o texture -lSDL2 -lSDL2_image && ./texture
+	 Linux ==>  gcc sdl_sound.c -o sound -lSDL2 -lSDL2_mixer && ./sound
 	 Mac OS ==> 
 	 Windows ==>
 */
 #include <stdbool.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 int main()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	// initialise library for loading png images
-	IMG_Init(IMG_INIT_PNG);
+	Mix_Init(MIX_INIT_MP3);
 
-	SDL_Window *win = SDL_CreateWindow("sdl image loading", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900,600,0);
+	
+   // 2. Open the audio device (44.1kHz, default format, stereo, 2048 byte chunk size)
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		printf("sorry audio device could not start\n");
+    }
+
+	SDL_Window *win = SDL_CreateWindow("sdl mouse input", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900,600,0);
 	SDL_Renderer *render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-	bool running = true;
 
-	SDL_Surface *img_surface = IMG_Load("./assets/screen.png");
-	SDL_Texture *img_texture = SDL_CreateTextureFromSurface(render, img_surface);
-	SDL_FreeSurface(img_surface);
+	Mix_Music *song = Mix_LoadMUS("./assets/song.mp3");
+
+	// play song once and stop
+	Mix_PlayMusic(song, 0);
+
 
 	SDL_Event ev;
+	bool running = true;
 	while (running)
 	{
+		
 		while (SDL_PollEvent(&ev))
 		{
 			if (ev.type == SDL_QUIT) 
@@ -49,20 +57,20 @@ int main()
 
 		}
 
-		SDL_SetRenderDrawColor(render, 200,200,200,255);
+		SDL_SetRenderDrawColor(render, 0,200,200,255);
 		SDL_RenderClear(render);
-		// texture rendering code here
-		SDL_RenderCopy(render, img_texture, NULL, NULL);
 		SDL_RenderPresent(render);
-
 	}
+	
 	// clean up resources
-	SDL_DestroyTexture(img_texture);
+	Mix_FreeMusic(song);
 
 	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(win);
+	Mix_Quit();
 	SDL_Quit();
 }
+
 
 
 
