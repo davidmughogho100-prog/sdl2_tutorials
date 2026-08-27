@@ -4,7 +4,7 @@
 
  Compilation commands:
  ====================
-	 Linux ==>  gcc sdl_window.c -o window -lSDL2 && ./window
+	 Linux ==>  gcc sdl_power.c -o power -lSDL2 && ./power
 	 Mac OS ==> 
 	 Windows ==>
 */
@@ -19,8 +19,33 @@ int main()
 	SDL_Window *win = SDL_CreateWindow("hello sdl2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900,600,0);
 	SDL_Renderer *render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-	bool running = true;
+	// battery checks code
+	int percentage;
+	SDL_PowerState battery_state = SDL_GetPowerInfo(NULL, &percentage);
+	printf("battery percentage: %d\n", percentage);
 
+	// getting battery states is fun lets use a switch
+	switch(battery_state)
+	{
+		case SDL_POWERSTATE_ON_BATTERY:
+			printf("charger is not plugged in and pc is using internal battery\n");
+			break;
+		case SDL_POWERSTATE_CHARGED:
+			printf("charger is connected but battery is full\n");
+			break;
+		case SDL_POWERSTATE_CHARGING:
+			printf("charger is plugged in and battery is charging\n");
+			break;
+		case SDL_POWERSTATE_UNKNOWN:
+			printf("cannot determine power state of the battery\n");
+			break;
+		default:
+			break;
+	}
+
+
+
+	bool running = true;
 	SDL_Event ev;
 	while (running)
 	{
