@@ -26,7 +26,7 @@ int main()
 	SDL_Window *win = SDL_CreateWindow("sdl text display", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,SCREEN_HEIGHT,0);
 	SDL_Renderer *render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-	TTF_Font *arial_font = TTF_OpenFont("./assets/arial.ttf", 30);
+	TTF_Font *arial_font = TTF_OpenFont("../assets/arial.ttf", 30);
 	SDL_Color text_color = {55,55,255,255};
 	SDL_Color text_color_bg = {255,55,255,255};
 
