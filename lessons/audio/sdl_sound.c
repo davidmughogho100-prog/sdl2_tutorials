@@ -27,7 +27,7 @@ int main()
 	SDL_Renderer *render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
 
-	Mix_Music *song = Mix_LoadMUS("./assets/song.mp3");
+	Mix_Music *song = Mix_LoadMUS("../assets/song.mp3");
 
 	// play song once and stop
 	Mix_PlayMusic(song, 0);

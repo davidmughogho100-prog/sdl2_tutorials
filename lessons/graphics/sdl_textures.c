@@ -23,7 +23,7 @@ int main()
 
 	bool running = true;
 
-	SDL_Surface *img_surface = IMG_Load("./assets/screen.png");
+	SDL_Surface *img_surface = IMG_Load("../assets/screen.png");
 	SDL_Texture *img_texture = SDL_CreateTextureFromSurface(render, img_surface);
 	SDL_FreeSurface(img_surface);
 
